@@ -1,6 +1,7 @@
 import { CreateTaskInput } from './create-task.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 import { TaskStatus } from '../types/task-status';
+import { IsEnum } from 'class-validator';
 
 @InputType()
 export class UpdateTaskInput extends PartialType(CreateTaskInput) {
@@ -8,5 +9,6 @@ export class UpdateTaskInput extends PartialType(CreateTaskInput) {
   id: number;
 
   @Field()
+  @IsEnum(TaskStatus)
   status?: TaskStatus;
 }
