@@ -2,10 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Task {
+  id: Int!
+  title: String!
+  description: String
+  status: String!
+  user: User!
+}
+
 type User {
   id: Int!
   name: String!
   email: String!
+  tasks: [Task!]!
 }
 
 type RegisterResponse {
@@ -23,11 +32,16 @@ type LoginResponse {
 type Query {
   users: [User!]!
   user: User!
+  tasks: [Task!]!
+  task(id: Int!): Task!
 }
 
 type Mutation {
   register(registerUserInput: RegisterUserInput!): RegisterResponse!
   login(loginUserInput: LoginUserInput!): LoginResponse!
+  createTask(createTaskInput: CreateTaskInput!): Task!
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  removeTask(id: Int!): Task!
 }
 
 input RegisterUserInput {
@@ -39,4 +53,16 @@ input RegisterUserInput {
 input LoginUserInput {
   email: String!
   password: String!
+}
+
+input CreateTaskInput {
+  title: String!
+  description: String
+}
+
+input UpdateTaskInput {
+  title: String
+  description: String
+  id: Int!
+  status: String!
 }

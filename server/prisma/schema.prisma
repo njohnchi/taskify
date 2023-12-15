@@ -15,6 +15,25 @@ model User {
     name        String
     email       String      @unique
     password    String
+    tasks       Task[]
     created_at  DateTime    @default(now())
     updated_at  DateTime    @updatedAt
+}
+
+model Task {
+    id          Int         @default(autoincrement())   @id
+    title       String
+    description String
+    status      TaskStatus  @default(PENDING)
+    created_at  DateTime    @default(now())
+    updated_at  DateTime    @updatedAt
+    user        User        @relation(fields: [user_id], references: [id])
+    user_id     Int
+}
+
+enum TaskStatus {
+    PENDING
+    DOING
+    DONE
+    CANCELLED
 }
