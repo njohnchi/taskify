@@ -16,11 +16,11 @@ import { CurrentUser, JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { User } from '../users/entities/user.entity';
 
 @Resolver(() => Task)
+@UseGuards(JwtAuthGuard)
 export class TasksResolver {
   constructor(private readonly tasksService: TasksService) {}
 
   @Mutation(() => Task)
-  @UseGuards(JwtAuthGuard)
   createTask(
     @Args('createTaskInput') createTaskInput: CreateTaskInput,
     @CurrentUser() user: User,
@@ -39,17 +39,19 @@ export class TasksResolver {
   }
 
   @Mutation(() => Task)
-  updateTask(@Args('updateTaskInput') updateTaskInput: UpdateTaskInput) {
+  updateTask(
+    @Args('updateTaskInput') updateTaskInput: UpdateTaskInput,
+  ): Promise<Task> {
     return this.tasksService.update(updateTaskInput.id, updateTaskInput);
   }
 
   @Mutation(() => Task)
-  removeTask(@Args('id', { type: () => Int }) id: number) {
+  removeTask(@Args('id', { type: () => Int }) id: number): Promise<Task> {
     return this.tasksService.remove(id);
   }
 
   @ResolveField(() => User)
-  user(@Parent() task: Task) {
+  user(@Parent() task: Task): User {
     return task.user;
   }
 }

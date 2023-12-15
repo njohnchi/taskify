@@ -30,7 +30,7 @@ export class TasksService {
     });
   }
 
-  findAll() {
+  findAll(): Promise<Task[]> {
     return this.prisma.task.findMany({
       include: {
         user: true,
@@ -38,7 +38,7 @@ export class TasksService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<Task> {
     return this.prisma.task.findUnique({
       where: {
         id,
@@ -49,7 +49,7 @@ export class TasksService {
     });
   }
 
-  update(id: number, updateTaskInput: UpdateTaskInput): Promise<Task> {
+  async update(id: number, updateTaskInput: UpdateTaskInput): Promise<Task> {
     return this.prisma.task.update({
       where: {
         id,
