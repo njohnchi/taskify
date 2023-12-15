@@ -71,4 +71,15 @@ export class TasksService {
       },
     });
   }
+
+  findAllByUser(user: User): Promise<Task[]> {
+    return this.prisma.task.findMany({
+      where: {
+        user_id: user.id,
+      },
+      include: {
+        user: true,
+      },
+    });
+  }
 }
