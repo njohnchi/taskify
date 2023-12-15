@@ -8,7 +8,7 @@ export class UpdateTaskInput extends PartialType(CreateTaskInput) {
   @Field(() => Int)
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   @IsEnum(TaskStatus)
   status?: TaskStatus;
 }

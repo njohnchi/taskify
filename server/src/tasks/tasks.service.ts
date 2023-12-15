@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTaskInput } from './dto/create-task.input';
 import { UpdateTaskInput } from './dto/update-task.input';
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { Task } from './entities/task.entity';
 import { User } from '../users/entities/user.entity';
 import { TaskStatus } from './types/task-status';

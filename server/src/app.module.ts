@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
 import { TasksModule } from './tasks/tasks.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TasksModule } from './tasks/tasks.module';
     UsersModule,
     AuthModule,
     TasksModule,
+    PrismaModule,
   ],
   providers: [AppService],
 })

@@ -31,28 +31,17 @@ type LoginResponse {
 
 type Query {
   users: [User!]!
-  user: User!
+  user(id: Int!): User!
   tasks: [Task!]!
   task(id: Int!): Task!
 }
 
 type Mutation {
-  register(registerUserInput: RegisterUserInput!): RegisterResponse!
-  login(loginUserInput: LoginUserInput!): LoginResponse!
   createTask(createTaskInput: CreateTaskInput!): Task!
   updateTask(updateTaskInput: UpdateTaskInput!): Task!
   removeTask(id: Int!): Task!
-}
-
-input RegisterUserInput {
-  name: String!
-  email: String!
-  password: String!
-}
-
-input LoginUserInput {
-  email: String!
-  password: String!
+  register(registerUserInput: RegisterUserInput!): RegisterResponse!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
 }
 
 input CreateTaskInput {
@@ -64,5 +53,16 @@ input UpdateTaskInput {
   title: String
   description: String
   id: Int!
-  status: String!
+  status: String
+}
+
+input RegisterUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
 }
