@@ -5,19 +5,15 @@ import { TaskStatus } from "~/types/task";
 import type { Task } from "~/types/task";
 
 const props = defineProps<{
-  status: TaskStatus
+  status: TaskStatus,
+  tasks: Task[]
 }>();
 
 provide<TaskStatus>("status", props.status);
 
-const tasks = ref<Task[]>([
-  {
-    id: 1,
-    title: "Hello",
-    description: "This is a test",
-    status: TaskStatus.PENDING,
-  }
-]);
+const taskList = computed(() => {
+  return props.tasks.filter(task => task.status === props.status);
+});
 
 </script>
 
@@ -27,7 +23,7 @@ const tasks = ref<Task[]>([
       <TaskListHeader :title="status" />
       <div class="h-96 overflow-y-auto">
         <TheTask
-          v-for="task in tasks"
+          v-for="task in taskList"
           :key="task.id"
           :task="task"
         />

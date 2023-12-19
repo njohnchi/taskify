@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { TaskStatus } from "~/types/task";
+import type { Task } from "~/types/task";
 
 const statuses: TaskStatus[] = Object.values(TaskStatus);
+const tasks = ref<Task[]>([]);
 
+provide<(task: Task) => void>("addTask", addTask);
+
+function addTask(task: Task) {
+  tasks.value.push(task);
+}
 </script>
 
 <template>
@@ -11,6 +18,7 @@ const statuses: TaskStatus[] = Object.values(TaskStatus);
       v-for="status in statuses"
       :key="status"
       :status="status"
+      :tasks="tasks"
     />
   </div>
 </template>

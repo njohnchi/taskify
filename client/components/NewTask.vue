@@ -1,13 +1,33 @@
 <script setup lang="ts">
+import type { Task } from "~/types/task";
+import { TaskStatus } from "~/types/task";
+
+const addTask = inject<(task: Task) => void>("addTask");
+const status: TaskStatus = inject<TaskStatus>("status");
+
 const showModal = ref(false);
+const task = ref<Task>({
+  id: parseInt(Math.random().toString(36).substr(2, 9),),
+  title: "",
+  description: "",
+  status: status,
+});
 
 const createTask = () => {
   showModal.value = false;
+  if (addTask) {
+    addTask(task.value);
+  }
+  task.value = {
+    id: parseInt(Math.random().toString(36).substr(2, 9),),
+    title: "",
+    description: "",
+    status: status as TaskStatus,
+  };
 }
 </script>
 
 <template>
-  <!-- Open the modal using ID.showModal() method -->
   <button
     class="btn btn-sm text-xs"
     @click="showModal = true"
@@ -27,6 +47,7 @@ const createTask = () => {
           Title
         </label>
         <input
+          v-model="task.title"
           type="text"
           class="input input-bordered"
         >
@@ -36,6 +57,7 @@ const createTask = () => {
           Description
         </label>
         <textarea
+          v-model="task.description"
           class="textarea h-24 textarea-bordered textarea-accent"
         />
       </div>
