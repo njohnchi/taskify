@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import type { Task } from "~/types/task";
+
+defineProps<{
+  task: Task
+}>();
 
 </script>
 
@@ -6,13 +11,13 @@
   <div class="card bg-base-100 shadow-xl mb-2">
     <div class="card-body">
       <div class="flex justify-between items-center">
-        <h3>Card title!</h3>
+        <h3>{{ task.title }}</h3>
         <div class="card-actions">
           <DeleteTask />
         </div>
       </div>
       <p class="text-xs text-gray-400">
-        We are using cookies for no reason.
+        {{ task.description }}
       </p>
     </div>
   </div>
