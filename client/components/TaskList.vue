@@ -18,7 +18,7 @@ const taskList = computed(() => {
 </script>
 
 <template>
-  <div class="card card-compact bg-primary text-primary-content">
+  <div class="card card-compact bg-neutral">
     <div class="card-body">
       <TaskListHeader :title="status" />
       <div class="h-96 overflow-y-auto">

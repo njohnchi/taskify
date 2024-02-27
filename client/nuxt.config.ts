@@ -6,5 +6,26 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@nuxtjs/eslint-module',
         '@formkit/nuxt',
+        '@sidebase/nuxt-auth',
     ],
+    auth: {
+        provider: {
+            type: 'local',
+            endpoints: {
+                signIn: { path: '/login', method: 'post' },
+                signOut: { path: '/logout', method: 'post' },
+                signUp: { path: '/register', method: 'post' },
+                getSession: { path: '/session', method: 'post' }
+            },
+            token: { signInResponseTokenPointer: '/token/accessToken' },
+            pages: {
+                login: '/login',
+                register: '/register',
+            },
+        },
+    },
+
+    formkit: {
+        autoImport: true,
+    },
 })
