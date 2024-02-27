@@ -23,6 +23,7 @@ export default defineNuxtConfig({
                 register: '/register',
             },
         },
+        globalAppMiddleware: true
     },
 
     formkit: {

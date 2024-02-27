@@ -1,4 +1,11 @@
 <script setup lang="ts">
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  },
+})
+
 const { signIn  } = useAuth();
 const err = ref('');
 const login = async (fields) => {

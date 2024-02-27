@@ -24,6 +24,9 @@ type RegisterResponse {
 
 type LoginResponse {
   accessToken: String!
+}
+
+type SessionResponse {
   id: Int!
   email: String!
   name: String!
@@ -34,6 +37,7 @@ type Query {
   user(id: Int!): User!
   tasks: [Task!]!
   task(id: Int!): Task!
+  session: SessionResponse!
 }
 
 type Mutation {

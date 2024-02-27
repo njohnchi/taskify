@@ -79,7 +79,7 @@ const { status, data, signOut  } = useAuth()
         </p>
         <button
           class="btn btn-ghost btn-circle"
-          @click="signOut"
+          @click="signOut({ callbackUrl: '/login' })"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

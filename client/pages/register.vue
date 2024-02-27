@@ -1,8 +1,26 @@
 <script setup lang="ts">
-const { status, data, signIn,  } = useAuth()
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  },
+})
+
+const { status, data, signIn  } = useAuth()
+const err = ref('');
+
 const register = async (fields) => {
-  await new Promise((r) => setTimeout(r, 1000))
-  alert(JSON.stringify(fields))
+  try {
+    const res = await $fetch('api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(fields),
+    });
+    if (res) {
+      await signIn(fields, { callbackUrl: '/' });
+    }
+  } catch (error) {
+    err.value = 'Invalid credentials. Please try again.'
+  }
 };
 </script>
 
@@ -15,6 +33,7 @@ const register = async (fields) => {
       <FormKit
         type="form"
         submit-label="Register"
+        :errors="[err]"
         @submit="register"
       >
         <FormKit
