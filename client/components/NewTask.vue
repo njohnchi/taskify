@@ -3,7 +3,7 @@ import type { Task } from "~/types/task";
 import { TaskStatus } from "~/types/task";
 
 const addTask = inject<(task: Task) => void>("addTask");
-const status: TaskStatus = inject<TaskStatus>("status");
+const status = inject<TaskStatus>("status") as TaskStatus;
 
 const showModal = ref(false);
 const task = ref<Task>({

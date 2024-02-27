@@ -2,7 +2,7 @@
 import { TaskStatus } from "~/types/task";
 import type { Task } from "~/types/task";
 
-const statuses: TaskStatus[] = Object.values(TaskStatus);
+const statuses = Object.values(TaskStatus) as TaskStatus[];
 const tasks = ref<Task[]>([]);
 
 provide<(task: Task) => void>("addTask", addTask);
