@@ -7,6 +7,8 @@ export default defineNuxtConfig({
         '@nuxtjs/eslint-module',
         '@formkit/nuxt',
         '@sidebase/nuxt-auth',
+        'nuxt-graphql-client',
+        '@hebilicious/vue-query-nuxt',
     ],
     auth: {
         provider: {

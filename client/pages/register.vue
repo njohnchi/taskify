@@ -6,7 +6,7 @@ definePageMeta({
   },
 })
 
-const { status, data, signIn  } = useAuth()
+const { status, data, token, signIn  } = useAuth()
 const err = ref('');
 
 const register = async (fields) => {
@@ -17,6 +17,7 @@ const register = async (fields) => {
     });
     if (res) {
       await signIn(fields, { callbackUrl: '/' });
+      useGqlToken(token.value)
     }
   } catch (error) {
     err.value = 'Invalid credentials. Please try again.'

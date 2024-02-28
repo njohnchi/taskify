@@ -6,11 +6,12 @@ definePageMeta({
   },
 })
 
-const { signIn  } = useAuth();
+const { token, signIn  } = useAuth();
 const err = ref('');
 const login = async (fields) => {
   try {
     await signIn(fields, { callbackUrl: '/' });
+    useGqlToken(token.value)
     err.value = '';
   } catch (error) {
       err.value = 'Invalid email or password';
