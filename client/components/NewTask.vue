@@ -22,7 +22,7 @@ const createTask = () => {
     id: parseInt(Math.random().toString(36).substr(2, 9),),
     title: "",
     description: "",
-    status: status as TaskStatus,
+    status: status,
   };
 }
 </script>

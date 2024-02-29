@@ -1,6 +1,6 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 import { TaskStatus } from '../types/task-status';
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsEnum, Length } from 'class-validator';
 
 @InputType()
 export class CreateTaskInput {
@@ -10,4 +10,8 @@ export class CreateTaskInput {
 
   @Field({ nullable: true })
   description?: string;
+
+  @Field({ defaultValue: TaskStatus.PENDING, nullable: true })
+  @IsEnum(TaskStatus)
+  status?: TaskStatus;
 }

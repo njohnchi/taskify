@@ -4,20 +4,19 @@ import { UpdateTaskInput } from './dto/update-task.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { Task } from './entities/task.entity';
 import { User } from '../users/entities/user.entity';
-import { TaskStatus } from './types/task-status';
 
 @Injectable()
 export class TasksService {
   constructor(private prisma: PrismaService) {}
 
   create(createTaskInput: CreateTaskInput, user: User): Promise<Task> {
-    const { title, description } = createTaskInput;
+    const { title, description, status } = createTaskInput;
 
     return this.prisma.task.create({
       data: {
         title,
         description,
-        status: TaskStatus.PENDING,
+        status: status,
         user: {
           connect: {
             id: user.id,
@@ -30,8 +29,11 @@ export class TasksService {
     });
   }
 
-  findAll(): Promise<Task[]> {
+  findAll(user_id: number): Promise<Task[]> {
     return this.prisma.task.findMany({
+      where: {
+        user_id,
+      },
       include: {
         user: true,
       },

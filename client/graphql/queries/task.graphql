@@ -7,8 +7,8 @@ query tasks{
     }
 }
 
-mutation createTask($title: String!, $description: String!) {
-    createTask(createTaskInput: {title: $title, description: $description}) {
+mutation createTask($title: String!, $description: String!, $status: String!) {
+    createTask(createTaskInput: {title: $title, description: $description, status: $status}) {
         id
         title
         description

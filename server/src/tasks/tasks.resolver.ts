@@ -29,8 +29,8 @@ export class TasksResolver {
   }
 
   @Query(() => [Task], { name: 'tasks' })
-  findAll() {
-    return this.tasksService.findAll();
+  findAll(@CurrentUser() user: User) {
+    return this.tasksService.findAll(user.id);
   }
 
   @Query(() => Task, { name: 'task' })

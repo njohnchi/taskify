@@ -51,13 +51,14 @@ type Mutation {
 input CreateTaskInput {
   title: String!
   description: String
+  status: String = "PENDING"
 }
 
 input UpdateTaskInput {
   title: String
   description: String
-  id: Int!
   status: String
+  id: Int!
 }
 
 input RegisterUserInput {
