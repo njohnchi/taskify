@@ -10,6 +10,9 @@ export default defineNuxtConfig({
         'nuxt-graphql-client',
         '@hebilicious/vue-query-nuxt',
     ],
+    runtimeConfig: {
+      gqlHost: process.env.GQL_HOST,
+    },
     auth: {
         provider: {
             type: 'local',

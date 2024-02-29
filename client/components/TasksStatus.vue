@@ -6,9 +6,12 @@ const statuses = Object.values(TaskStatus) as TaskStatus[];
 
 const queryClient = useQueryClient()
 // Query
-const { isLoading, data } = useQuery({
+const { isLoading, isError, data: tasks } = useQuery({
   queryKey: ['tasks'],
   queryFn: () => GqlTasks(),
+  select: (data) => {
+    return data.tasks
+  }
 })
 
 // Mutation
@@ -28,14 +31,14 @@ async function addTask(task: Task) {
 
 <template>
   <div
-    v-if="!isLoading"
+    v-if="!isLoading && !isError"
     class="grid grid-cols-3 gap-8 h-full w-full"
   >
     <TaskList
       v-for="status in statuses"
       :key="status"
       :status="status"
-      :tasks="data.tasks"
+      :tasks="tasks"
     />
   </div>
 </template>

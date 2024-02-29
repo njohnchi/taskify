@@ -3,7 +3,8 @@ import { gql, GraphQLClient } from 'graphql-request';
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
-  const graphQLClient = new GraphQLClient('http://localhost:4000/graphql');
+  const { gqlHost } = useRuntimeConfig(event)
+  const graphQLClient = new GraphQLClient(gqlHost);
 
   const mutation = gql`
       mutation($name: String!, $email: String!, $password: String!) {
