@@ -2,9 +2,7 @@
 import type { Task } from "~/types/task";
 import { TaskStatus } from "~/types/task";
 
-const addTask = inject<(task: Task) => void>("addTask");
-const status = inject<TaskStatus>("status") as TaskStatus;
-
+const status = inject<TaskStatus>("status", TaskStatus.PENDING);
 const showModal = ref(false);
 const task = ref<Task>({
   id: parseInt(Math.random().toString(36).substr(2, 9),),
@@ -13,11 +11,18 @@ const task = ref<Task>({
   status: status,
 });
 
+const queryClient = useQueryClient()
+// Mutation
+const { mutate } = useMutation({
+  mutationFn: (task: Task) => GqlCreateTask(task),
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['tasks'] })
+  },
+})
+
 const createTask = () => {
   showModal.value = false;
-  if (addTask) {
-    addTask(task.value);
-  }
+  mutate(task.value);
   task.value = {
     id: parseInt(Math.random().toString(36).substr(2, 9),),
     title: "",

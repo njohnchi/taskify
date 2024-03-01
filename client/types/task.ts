@@ -1,10 +1,11 @@
-import type { User } from './user';
+import type { User } from "~/types/user";
 
 export enum TaskStatus {
-    PENDING = 'PENDING',
-    DOING = 'DOING',
-    DONE = 'DONE',
+  PENDING = 'PENDING',
+  DOING = 'DOING',
+  DONE = 'DONE',
 }
+
 export interface Task {
     id: number;
     title: string;

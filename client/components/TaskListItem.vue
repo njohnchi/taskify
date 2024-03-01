@@ -13,7 +13,7 @@ defineProps<{
       <div class="flex justify-between items-center">
         <h3>{{ task.title }}</h3>
         <div class="card-actions">
-          <DeleteTask />
+          <DeleteTask :id="task.id" />
         </div>
       </div>
       <p class="text-xs text-gray-400">
