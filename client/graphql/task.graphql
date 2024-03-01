@@ -16,6 +16,15 @@ mutation createTask($title: String!, $description: String!, $status: String!) {
     }
 }
 
+mutation updateTask($id: Int!, $title: String!, $description: String!, $status: String!) {
+    updateTask(updateTaskInput: {id: $id, title: $title, description: $description, status: $status}) {
+        id
+        title
+        description
+        status
+    }
+}
+
 mutation deleteTask($id: Int!) {
     removeTask(id: $id) {
         id
