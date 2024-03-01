@@ -9,21 +9,20 @@ defineProps<{
 </script>
 
 <template>
-  <EditTask :task="task">
-    <div class="card bg-base-100 shadow-xl mb-2">
-      <div class="card-body">
-        <div class="flex justify-between items-center">
-          <h3>{{ task.title }}</h3>
-          <div class="card-actions">
-            <DeleteTask :id="task.id" />
-          </div>
+  <div class="card bg-base-100 shadow-xl mb-2">
+    <div class="card-body">
+      <div class="flex justify-between items-center">
+        <h3>{{ task.title }}</h3>
+        <div class="card-actions">
+          <EditTask :task="task" />
+          <DeleteTask :id="task.id" />
         </div>
-        <p class="text-xs text-gray-400">
-          {{ task.description }}
-        </p>
       </div>
+      <p class="text-xs text-gray-400">
+        {{ task.description }}
+      </p>
     </div>
-  </EditTask>
+  </div>
 </template>
 
 <style scoped>

@@ -14,7 +14,17 @@ const { isLoading, isError, data: tasks } = useQuery({
 
 <template>
   <div
+    v-if="isLoading"
+    class="flex justify-center items-center h-full w-full"
+  >
+    <h1 class="text-3xl">
+      Loading....
+    </h1>
+  </div>
+
+  <div
     v-if="!isLoading && !isError"
+    :key="tasks"
     class="grid grid-cols-3 gap-8 h-full w-full"
   >
     <TaskList
